@@ -52,9 +52,10 @@ const ChatBox = ({ preferences, setPreferences, reasoningChain, setReasoningChai
       // Send request to API
       const response = await sendChatRequest(input, preferences, messages);
       console.log('API Response:', response);
+      
       // Update preferences if returned in response
-      if (response.updatedPreferences) {
-      console.log('updatedPreferences:', response.updatedPreferences);
+      if (response.updatedPreferences && Object.keys(response.updatedPreferences).length > 0) {
+        console.log('updatedPreferences:', response.updatedPreferences);
         setPreferences(prev => ({
           ...prev,
           ...response.updatedPreferences,
@@ -82,13 +83,42 @@ const ChatBox = ({ preferences, setPreferences, reasoningChain, setReasoningChai
         ]);
       }
 
+      // Process recommendations from table if available
+      let recommendations = [];
+      console.log('response.recommendations', response.recommendations);
+      if (response.recommendations && response.recommendations !== '') {
+        try {
+          // Parse the table to extract movie recommendations
+          const tableLines = response.recommendations.filter(line => line.trim());
+          
+          // Skip header line and separator line
+          const movieLines = tableLines.slice(2);
+          
+          recommendations = movieLines.map(line => {
+            const parts = line.split('|').map(part => part.trim()).filter(part => part);
+            if (parts.length >= 3) {
+              return {
+                title: parts[0],
+                year: parts[1],
+                description: parts[2]
+              };
+            }
+            return null;
+          }).filter(movie => movie);
+          
+          console.log('Parsed recommendations:', recommendations);
+        } catch (error) {
+          console.error('Error parsing recommendations table:', error);
+        }
+      }
+
       // Add bot message with the response
       setMessages(prev => [
         ...prev,
         { 
           type: 'bot', 
-          content: response.message, 
-          recommendations: response.recommendations || [] 
+          content: response.message || 'I found some movie recommendations for you!', 
+          recommendations: recommendations
         }
       ]);
 

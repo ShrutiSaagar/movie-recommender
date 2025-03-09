@@ -44,9 +44,11 @@ export const constructOpenAIPrompt = (userInput, currentPreferences, conversatio
       If necessary, cycle through the reasoning steps again to refine the recommendation
 
       For each response, provide:
-      1. A friendly, conversational message for the user with movie recommendations. When recommending movies, include the title, year, and a brief description. Make sure there are at least 5-7 recommendations which are diverse. And also take just the latest user preferences for the recommendations but just take a rough understanding of the previous messages.
-      2. Your reasoning process (clearly labeled as "REASONING")
-      3. Updated user preferences based on the conversation (in JSON format labeled as "PREFERENCES_JSON, and only a valid json should immediately follow it in a new line starting with a { and ending with a }").
+      1. A friendly, conversational message for the user with movie recommendations. When recommending movies, include the title, year, and a brief description. Make sure there are 5 recommendations which are diverse. And also take just the latest user preferences for the recommendations but just take a rough understanding of the previous messages. Only the recommendations and the any generic info to the user should be here.
+      2. Output the user message after the <MESSAGE> tag and end it before </MESSAGE> tag.
+      2. Please output any table with a <TABLE> tag and make sure to include the table in the response and the end of the table should have </TABLE> tag.
+      3. Your reasoning process and justifications should come after <REASONING> tag and before </REASONING> tag
+      4. Updated user preferences based on the conversation (in JSON format within <PREFERENCES_JSON> and </PREFERENCES_JSON> tags), and only a valid json should be present within it starting with { and ending with a }").
       
       Current user preferences (on a scale of 0-10, please consider it as a relative interpretation of the user's preferences ): ${JSON.stringify(currentPreferences)}
       

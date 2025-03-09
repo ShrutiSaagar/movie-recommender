@@ -95,58 +95,61 @@ export const mockSendChatRequest = async (userInput, preferences, conversationHi
     }, 1500);
   });
 };
-
 export const parseResponse = (response) => {
   console.log('parseResponse called');
-  // const lines = response.split('\n');
-  // find string until REASONING
-  var responseLine = parseStringBetweenMarkers(response, '', 'REASONING');
-  //lines.find(line => line.includes('RESPONSE'));
-  // responseLine = responseLine.join(' ');
-  // search for REASONING in the response and parse it
-  var reasoningLine = parseStringBetweenMarkers(response, 'REASONING', 'PREFERENCES_JSON');
-  reasoningLine = reasoningLine.join(' ');
+  
+  // Helper function to extract content between start and end markers
+  const extractBetweenMarkers = (text, startMarker, endMarker) => {
+    const startIndex = text.indexOf(startMarker);
+    if (startIndex === -1) return '';
+    
+    const contentStartIndex = startIndex + startMarker.length;
+    const endIndex = text.indexOf(endMarker, contentStartIndex);
+    if (endIndex === -1) return '';
+    
+    return text.substring(contentStartIndex, endIndex);
+  };
+  function extractAndParseJson(inputString) {
+    try {
+      // Use regex to find content between <PREFERENCES_JSON> tags
+      const regex = /<PREFERENCES_JSON>(.*?)<\/PREFERENCES_JSON>/s;
+      const match = inputString.match(regex);
+      
+      // Check if we found a match
+      if (match && match[1]) {
+        // Parse the extracted JSON string
+        const jsonData = JSON.parse(match[1]);
+        return jsonData;
+      } else {
+        // No match found
+        return null;
+      }
+    } catch (error) {
+      // Handle any errors (like invalid JSON)
+      console.error("Error extracting or parsing JSON:", error);
+      return null;
+    }
+  }
+  // Extract message
+  const message = extractBetweenMarkers(response, '<MESSAGE>', '</MESSAGE>');
+  
+  // Extract table
+  let table = extractBetweenMarkers(response, '<TABLE>', '</TABLE>');
+  console.log('table ', table);
+  table = table.split('\n').filter(row => row.trim() !== '');
 
-  // const reasoningLine = lines.find(line => line.includes('REASONING'));
-  // search for PREFERENCES_JSON in the response and parse it till the end
-  var preferences = parseStringBetweenMarkers(response, '{');
-  preferences = preferences.join(' ');
-  // console.log('responseLine ', responseLine);
-  // console.log('reasoningLine ', reasoningLine);
-  // console.log('preferencesLine ', preferences);
+  
+  // Extract reasoning
+  const reasoning = extractBetweenMarkers(response, '<REASONING>', '</REASONING>');
+  console.log('reasoning ', reasoning); 
+  // Extract preferences JSON
+  // const preferencesStr = extractBetweenMarkers(response, '<PREFERENCES_JSON>', '</PREFERENCES_JSON>');
+  const preferences = extractAndParseJson(response);
+  
   return {
-    updatedPreferences: preferences? JSON.parse(preferences) : {},
-    reasoning: reasoningLine ? reasoningLine : '',
-    message: responseLine ? responseLine : ''
-  }
-} 
-
-export function parseStringBetweenMarkers(inputString, startMarker, endMarker) {
-  // Split the input string into lines
-  const lines = inputString.split('\n');
-  // Initialize a flag to start collecting lines
-  let collecting = startMarker === '' ? true : false;
-  const resultLines = [];
-  for (const line of lines) {
-      // Check if the line contains the start marker
-      if ( !collecting && line.includes(startMarker)) {
-          collecting = true;  // Start collecting lines
-          if(startMarker === '{')
-            resultLines.push('{');
-          continue; // Move to the next line
-      }
-
-      // Check if the line contains the end marker
-      if (line.includes(endMarker)) {
-          collecting = false; // Stop collecting lines
-          break; // Exit the loop since we reached the end marker
-      }
-
-      // If we are collecting, add the current line to the result
-      if (collecting) {
-          resultLines.push(line);
-      }
-  }
-
-  return resultLines;
-}
+    updatedPreferences: preferences,
+    recommendations: table || '',
+    reasoning: reasoning || '',
+    message: message || ''
+  };
+};
