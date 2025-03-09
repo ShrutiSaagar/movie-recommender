@@ -18,7 +18,7 @@ export const constructOpenAIPrompt = (userInput, currentPreferences, conversatio
       For each response, provide:
       1. A friendly, conversational message for the user with movie recommendations. When recommending movies, include the title, year, and a brief description.
       2. Your reasoning process (clearly labeled as "REASONING")
-      3. Updated user preferences based on the conversation (in JSON format labeled as "PREFERENCES_JSON, and only a valid json should follow it")
+      3. Updated user preferences based on the conversation (in JSON format labeled as "PREFERENCES_JSON, and only a valid json should immediately follow it starting with a { and ending with a }").
       
       Current user preferences: ${JSON.stringify(currentPreferences)}
       
