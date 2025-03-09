@@ -1,0 +1,86 @@
+.keyword-filter {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .keyword-input-container {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  .keyword-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .keyword-input:focus {
+    border-color: var(--primary-color);
+  }
+  
+  .add-keyword-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .add-keyword-button:hover:not(:disabled) {
+    background-color: #5000d1;
+  }
+  
+  .add-keyword-button:disabled {
+    background-color: #a78be0;
+    cursor: not-allowed;
+  }
+  
+  .keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .keyword-tag {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 6px 10px;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  
+  .keyword-tag button {
+    background: none;
+    border: none;
+    margin-left: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+  
+  .keyword-tag button:hover {
+    color: var(--error-color);
+  }
+  
+  .no-keywords {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+  }
+  

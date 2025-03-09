@@ -1,0 +1,64 @@
+.range-filter {
+    margin-bottom: 15px;
+  }
+  
+  .range-filter label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .range-values {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  
+  .range-sliders {
+    position: relative;
+    height: 30px;
+  }
+  
+  .range-slider {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+    pointer-events: none;
+  }
+  
+  .range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  
+  .range-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  
+  .min-slider {
+    z-index: 1;
+  }
+  
+  .max-slider {
+    z-index: 2;
+  }
+  

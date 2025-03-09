@@ -1,0 +1,56 @@
+.filter-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .filter-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .filter-tabs button {
+    flex: 1;
+    padding: 12px 8px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .filter-tabs button:hover {
+    color: var(--primary-color);
+  }
+  
+  .filter-tabs button.active {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  .filter-tabs button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+  }
+  
+  .filter-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+  }
+  
+  .range-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  

@@ -1,0 +1,58 @@
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+  }
+  
+  .genre-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+  }
+  
+  .genre-item label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .weight-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .weight-button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.2s ease;
+  }
+  
+  .weight-button:hover:not(:disabled) {
+    background-color: #5000d1;
+  }
+  
+  .weight-button:disabled {
+    background-color: #a78be0;
+    cursor: not-allowed;
+  }
+  
+  .weight-value {
+    font-size: 14px;
+    font-weight: 600;
+    width: 18px;
+    text-align: center;
+  }
+  
