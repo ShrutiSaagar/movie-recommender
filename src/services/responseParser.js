@@ -97,7 +97,6 @@ export const mockSendChatRequest = async (userInput, preferences, conversationHi
 };
 
 export const parseResponse = (response) => {
-  const parsedResponse = {};
   console.log('parseResponse called');
   // const lines = response.split('\n');
   // find string until REASONING
@@ -126,11 +125,9 @@ export function parseStringBetweenMarkers(inputString, startMarker, endMarker) {
   // Split the input string into lines
   const lines = inputString.split('\n');
   // Initialize a flag to start collecting lines
-  let collecting = startMarker == '' ? true : false;
+  let collecting = startMarker === '' ? true : false;
   const resultLines = [];
-  var i=0;
   for (const line of lines) {
-      i++;
       // Check if the line contains the start marker
       if ( !collecting && line.includes(startMarker)) {
           collecting = true;  // Start collecting lines
