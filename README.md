@@ -30,7 +30,7 @@ MovieMind is an interactive AI-powered movie recommendation system that addresse
 1. Clone the repository:
 2. Install dependencies:
 3. Create a `.env` file in the root directory with your OpenAI API key:
-4. Start the development server:
+4. Start the development server: `npm start`
 
 5. Open your browser and navigate to `http://localhost:3000`
 
@@ -52,3 +52,7 @@ MovieMind is an interactive AI-powered movie recommendation system that addresse
 
 ## Project Structure
 
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
