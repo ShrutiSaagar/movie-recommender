@@ -109,7 +109,7 @@ export const parseResponse = (response) => {
 
   // const reasoningLine = lines.find(line => line.includes('REASONING'));
   // search for PREFERENCES_JSON in the response and parse it till the end
-  var preferences = parseStringBetweenMarkers(response, 'PREFERENCES_JSON');
+  var preferences = parseStringBetweenMarkers(response, '{');
   preferences = preferences.join(' ');
   // console.log('responseLine ', responseLine);
   // console.log('reasoningLine ', reasoningLine);
@@ -131,6 +131,8 @@ export function parseStringBetweenMarkers(inputString, startMarker, endMarker) {
       // Check if the line contains the start marker
       if ( !collecting && line.includes(startMarker)) {
           collecting = true;  // Start collecting lines
+          if(startMarker == '{')
+            resultLines.push('{');
           continue; // Move to the next line
       }
 
