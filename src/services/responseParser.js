@@ -131,7 +131,7 @@ export function parseStringBetweenMarkers(inputString, startMarker, endMarker) {
       // Check if the line contains the start marker
       if ( !collecting && line.includes(startMarker)) {
           collecting = true;  // Start collecting lines
-          if(startMarker == '{')
+          if(startMarker === '{')
             resultLines.push('{');
           continue; // Move to the next line
       }
