@@ -17,6 +17,9 @@ MovieMind is an interactive AI-powered movie recommendation system that addresse
 - Real-time reasoning process display showing how recommendations are made
 - Responsive UI that adapts to different screen sizes
 
+Code is hosted here: https://tinyurl.com/reel-ai
+<img width="1495" alt="Screenshot 2025-03-15 at 6 25 33 PM" src="https://github.com/user-attachments/assets/36fd481f-86bd-4dc7-bdd0-935c5c92b0eb" />
+
 ## Getting Started
 
 ### Prerequisites
